@@ -1,0 +1,43 @@
+{
+   "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "browser": true
+   },
+   "extends": [
+      "airbnb-base",
+      "plugin:jest/recommended"
+   ],
+   "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+   },
+   "parser": "babel-eslint",
+   "parserOptions": {
+      "ecmaVersion": 2018,
+      "ecmaFeatures": {
+         "jsx": true
+      }
+   },
+   "plugins": [
+      "jest",
+      "babel",
+      "react",
+      "jsx-a11y"
+   ],
+   "rules": {
+      "indent": [
+         "error",
+         3
+      ],
+      "comma-dangle": "off",
+      "implicit-arrow-linebreak": "off",
+      "array-bracket-spacing": "off",
+      "no-unused-expressions": 0,
+      "babel/no-unused-expressions": 1,
+      "global-require": "off",
+      "react/jsx-uses-react": 1,
+      "react/jsx-uses-vars": 1
+   }
+}

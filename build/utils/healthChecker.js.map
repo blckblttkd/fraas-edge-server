@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/server/utils/healthChecker.js"],"names":["module","exports"],"mappings":";;AAAAA,MAAM,CAACC,OAAP,GAAiB,YAAY,IAA7B","sourcesContent":["module.exports = async () => true;\n"],"file":"healthChecker.js"}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang={{lang}}>
+<head>
+    <title>CloudFRaas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    {{!-- add basic style sheets here --}}
+
+    {{!-- add application style sheets here --}}
+
+    {{!-- add favicon resolution --}}
+    {{!-- <link rel="shortcut icon" href="{{favicon}}"> --}}
+</head>
+<body>
+    {{!-- Main anchor point for the SPA bundle --}}
+    <div id="root">{{{body}}}</div>
+
+    {{!-- Any Provider and Apollo Client state initialization from SSR --}}
+
+
+    {{!-- Client bundles --}}
+    <script src="{{resolveBundle 'bundle.js'}}"></script>
+    <script src="{{resolveBundle 'vendor.js'}}"></script>
+</body>
+</html>
