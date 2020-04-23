@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang={{lang}}>
+<html lang="{{lang}}">
 <head>
-    <title>CloudFRaas</title>
+    <title>{{title}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
@@ -17,7 +17,9 @@
     <div id="root">{{{body}}}</div>
 
     {{!-- Any Provider and Apollo Client state initialization from SSR --}}
-
+    <script>
+        window.__LANGUAGE__ = {{{language}}}
+    </script>
 
     {{!-- Client bundles --}}
     <script src="{{resolveBundle 'bundle.js'}}"></script>
