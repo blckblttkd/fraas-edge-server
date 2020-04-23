@@ -13,6 +13,7 @@ import { name } from '../../../package.json';
 
 const internalLogger = new Logger({
    name,
+   levelInString: true,
    streams: [
       {
          stream: process.stdout,
@@ -23,9 +24,32 @@ const internalLogger = new Logger({
 
 /**
  *
- * @param {string} widgetType
+ * @param {string} tracer
  * @returns Logger
  */
-export default function (widgetType) {
-   return internalLogger.child({ widget_type: widgetType }, false);
+export default function (tracer) {
+   // intercepts all log messages and prepends a trace marker
+   // to every message.  If no tracer exists, it will write
+   // the log message as supplied.
+   const handler = {
+      get(target, propKey) {
+         const origMethod = target[propKey];
+         return (...args) => {
+            if (tracer) {
+               if (typeof args[0] === 'object') {
+                  origMethod.call(target, {
+                     tracer,
+                     ...args[0]
+                  });
+               } else {
+                  origMethod.apply(target, [{ tracer }, ...args]);
+               }
+            } else {
+               origMethod.apply(target, args);
+            }
+         };
+      }
+   };
+
+   return new Proxy(internalLogger.child(null, false), handler);
 }

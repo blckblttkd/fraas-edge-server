@@ -2,11 +2,12 @@ import express from 'express';
 import compression from 'compression';
 import { bodyParserGraphQL } from 'body-parser-graphql';
 import path from 'path';
+import addRequestId from 'express-request-id';
 import helmet from './helmet';
 import csrf from './csrf';
 import routes from '../routes';
 import registerViewEngine from './viewEngine';
-import createLogger from '../utils/logger';
+import loggerMiddleware from './logger';
 
 /**
  * @typedef CSPOptions
@@ -26,28 +27,31 @@ import createLogger from '../utils/logger';
  * @property {string} assetsDir
  */
 
-const log = createLogger('middleware');
-
 /**
  *
  * @param {Object} app
+ * @param {Object} logger
  * @param {MiddlewareOptions} options
  */
-export default function attach(app, options) {
-   log.trace('Configuring template engine.');
-   registerViewEngine(app, options.viewsDir);
+export default function attach(app, logger, options) {
+   app.use(addRequestId());
+   logger.trace('Adding request logger');
+   app.use(loggerMiddleware);
 
-   log.trace('Adding security measures');
+   logger.trace('Configuring template engine.');
+   registerViewEngine(app, logger, options.viewsDir);
+
+   logger.trace('Adding security measures');
    csrf(app, options.graphQLRoute, options.ignoredMutations);
    helmet(app, options.contentSecurityPolicy);
 
-   log.trace('Adding automatic response compression');
+   logger.trace('Adding automatic response compression');
    app.use(compression());
 
-   log.trace('Configuring graphql body parser');
+   logger.trace('Configuring graphql body parser');
    app.use(options.graphQLRoute, bodyParserGraphQL());
 
-   log.trace('Adding routes');
+   logger.trace('Adding routes');
    const publicPath = path.join(process.cwd(), 'build', options.publicDir);
    const assetsPath = path.join(process.cwd(), 'build', options.assetsDir);
    app.use('/public', express.static(publicPath));

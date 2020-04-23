@@ -1,10 +1,10 @@
 import i18n from 'i18next';
 import retrieveLanguageFile from '../helpers/retrieveLanguageFile';
 
-export default async () => {
+export default async (translation) => {
    const resources = {
       en: {
-         translation: await retrieveLanguageFile('en', false)
+         translation: translation
       }
    };
 
