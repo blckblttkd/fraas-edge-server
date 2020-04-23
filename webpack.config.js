@@ -2,11 +2,17 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 // const SRC_DIR = path.join(__dirname, 'src', 'universal');
 const OUTPUT_DIR = path.join(__dirname, 'build', 'public');
 const vendor = ['react', 'react-dom'];
+
+const themeList = ['paper'].map((theme) => ({
+   from: path.join(__dirname, 'src', 'universal', 'assets', theme),
+   to: path.join(__dirname, 'build', 'assets', theme)
+}));
 
 const config = {
    entry: {
@@ -113,7 +119,8 @@ const config = {
    plugins: [
       new CleanWebpackPlugin(),
       new ManifestPlugin(),
-      new webpack.HashedModuleIdsPlugin()
+      new webpack.HashedModuleIdsPlugin(),
+      new CopyPlugin(themeList)
    ],
    devtool: 'cheap-module-source-map'
 };

@@ -23,6 +23,7 @@ import createLogger from '../utils/logger';
  * @property {string} publicDir
  * @property {string} corsOrigins
  * @property {string} viewsDir
+ * @property {string} assetsDir
  */
 
 const log = createLogger('middleware');
@@ -48,6 +49,8 @@ export default function attach(app, options) {
 
    log.trace('Adding routes');
    const publicPath = path.join(process.cwd(), 'build', options.publicDir);
-   app.use('/assets', express.static(publicPath));
+   const assetsPath = path.join(process.cwd(), 'build', options.assetsDir);
+   app.use('/public', express.static(publicPath));
+   app.use('/assets', express.static(assetsPath));
    app.use(routes);
 }

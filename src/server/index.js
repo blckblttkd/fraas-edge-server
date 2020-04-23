@@ -27,6 +27,7 @@ attachMiddleware(app, {
    },
    corsOrigins: '*',
    publicDir: 'public',
+   assetsDir: 'assets',
    viewsDir: './src/server/views'
 });
 
