@@ -17,10 +17,10 @@ export default function resolveBundle(bundleName) {
       if (fs.existsSync(manifestPath)) {
          // eslint-disable-next-line import/no-dynamic-require
          manifest = require(manifestPath);
-         return `/assets/${manifest[bundleName]}`;
+         return `/public/${manifest[bundleName]}`;
       }
 
-      return `/assets/${bundleName}`;
+      return `/public/${bundleName}`;
    } catch (error) {
       log.error({
          logId: 'e3cbb634-0db8-4f03-a708-29f2f75a5137',

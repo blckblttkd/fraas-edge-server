@@ -19,11 +19,7 @@ attachMiddleware(app, {
    ignoredMutations: [],
    contentSecurityPolicy: {
       defaultSrc: cspSelf,
-      scriptSrc:
-         process.env.NODE_ENV === 'local'
-            ? [...cspSelf, "'unsafe-eval'"]
-            : cspSelf,
-      objectSrc: cspSelf
+      scriptSrc: [...cspSelf, "'unsafe-inline'"]
    },
    corsOrigins: '*',
    publicDir: 'public',
