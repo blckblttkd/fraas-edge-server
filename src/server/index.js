@@ -14,7 +14,7 @@ const app = express();
 const log = createLogger('Server');
 
 const cspSelf = ["'self'"];
-attachMiddleware(app, {
+attachMiddleware(app, log,{
    graphQLRoute: '/graphql',
    ignoredMutations: [],
    contentSecurityPolicy: {

@@ -6,9 +6,10 @@ import Root from '../../universal/components/Root';
 import i18nInit from '../utils/i18n';
 
 export default async function main(req, res) {
-   await i18nInit();
    const locale = 'en';
-   const rawLanguage = retrieveLanguageFile(locale);
+   const rawLanguage = retrieveLanguageFile(req, locale);
+   await i18nInit(rawLanguage);
+
    const language = serialize(rawLanguage, { isJSON: true });
 
    const body = renderToString(<Root/>);
