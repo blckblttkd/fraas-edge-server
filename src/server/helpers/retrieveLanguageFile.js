@@ -2,7 +2,11 @@ import path from 'path';
 import fs from 'fs';
 
 /**
- *
+ * @description Returns the contents of a language file based on the locale definition.
+ * @module
+ * @public
+ * @function
+ * @param {import('express/lib/request')} request
  * @param {string} locale
  * @returns {string|{}}
  */

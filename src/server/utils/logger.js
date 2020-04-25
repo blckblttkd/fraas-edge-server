@@ -2,8 +2,11 @@ import Logger from 'bunyan';
 import { name } from '../../../package.json';
 
 /**
+ * @module utils
+ */
+/**
  *
- * @typedef Logger
+ * @typedef module:utils.Logger
  * @property {function} info
  * @property {function} trace
  * @property {function} debug
@@ -11,6 +14,7 @@ import { name } from '../../../package.json';
  * @property {function} warn
  */
 
+/* istanbul ignore next */
 const internalLogger = new Logger({
    name,
    levelInString: true,
@@ -24,10 +28,10 @@ const internalLogger = new Logger({
 
 /**
  *
- * @param {string} tracer
+ * @param {string} requestId
  * @returns Logger
  */
-export default function (tracer) {
+export default function (requestId) {
    // intercepts all log messages and prepends a trace marker
    // to every message.  If no tracer exists, it will write
    // the log message as supplied.
@@ -35,14 +39,14 @@ export default function (tracer) {
       get(target, propKey) {
          const origMethod = target[propKey];
          return (...args) => {
-            if (tracer) {
+            if (requestId) {
                if (typeof args[0] === 'object') {
                   origMethod.call(target, {
-                     tracer,
+                     requestId,
                      ...args[0]
                   });
                } else {
-                  origMethod.apply(target, [{ tracer }, ...args]);
+                  origMethod.apply(target, [{ requestId }, ...args]);
                }
             } else {
                origMethod.apply(target, args);

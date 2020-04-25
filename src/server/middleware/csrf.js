@@ -1,3 +1,4 @@
+/* istanbul ignore file because this is going to get re-written when auth is done */
 import createLogger from '../utils/logger';
 
 const log = createLogger('CSRF middleware');
