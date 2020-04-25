@@ -1,10 +1,9 @@
 import i18n from 'i18next';
-import retrieveLanguageFile from '../helpers/retrieveLanguageFile';
 
-export default async (translation) => {
+export default (translation) => {
    const resources = {
       en: {
-         translation: translation
+         translation
       }
    };
 

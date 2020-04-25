@@ -5,14 +5,20 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
-// const SRC_DIR = path.join(__dirname, 'src', 'universal');
 const OUTPUT_DIR = path.join(__dirname, 'build', 'public');
 const vendor = ['react', 'react-dom'];
 
-const themeList = ['paper'].map((theme) => ({
+// Instructions for copying any themes
+const copyList = ['paper'].map((theme) => ({
    from: path.join(__dirname, 'src', 'universal', 'assets', theme),
    to: path.join(__dirname, 'build', 'assets', theme)
 }));
+
+// Instructions for copying translation files
+copyList.push({
+   from: path.join(__dirname, 'translations'),
+   to: path.join(__dirname, 'build', 'translations')
+});
 
 const config = {
    entry: {
@@ -120,7 +126,7 @@ const config = {
       new CleanWebpackPlugin(),
       new ManifestPlugin(),
       new webpack.HashedModuleIdsPlugin(),
-      new CopyPlugin(themeList)
+      new CopyPlugin(copyList)
    ],
    devtool: 'cheap-module-source-map'
 };

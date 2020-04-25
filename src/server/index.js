@@ -14,7 +14,7 @@ const app = express();
 const log = createLogger('Server');
 
 const cspSelf = ["'self'"];
-attachMiddleware(app, log,{
+attachMiddleware(app, log, {
    graphQLRoute: '/graphql',
    ignoredMutations: [],
    contentSecurityPolicy: {
@@ -30,9 +30,9 @@ attachMiddleware(app, log,{
 // Build out the GraphQL server
 const server = new ApolloServer({
    ...buildSchema(),
-   debug: !isDeployed,
-   playground: !isDeployed,
-   tracing: !isProduction
+   debug: !isDeployed(),
+   playground: !isDeployed(),
+   tracing: !isProduction()
 });
 
 // Register GraphQL middleware

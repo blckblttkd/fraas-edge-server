@@ -26,7 +26,8 @@ module.exports = {
       '!**/src/server/index.js',
       '!**/src/server/graphql/index.js',
       '!**/src/universal/index.js',
-      '!**/src/server/graphql/schema/**/*.js'
+      '!**/src/server/schema/**/*.js',
+      '!**/src/universal/assets/**'
    ],
 
    // The directory where Jest should output its coverage files
@@ -88,9 +89,9 @@ module.exports = {
    // ],
 
    // A map from regular expressions to module names that allow to stub out resources with a single module
-   moduleNameMapper: {
-      '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js'
-   },
+   // moduleNameMapper: {
+   //    '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js'
+   // },
 
    // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module
    // loader
@@ -139,7 +140,7 @@ module.exports = {
    // runner: "jest-runner",
 
    // The paths to modules that run some code to configure or set up the testing environment before each test
-   setupFiles: ['<rootDir>/tests/setup.js'],
+   // setupFiles: ['<rootDir>/tests/setup.js'],
 
    // A list of paths to modules that run some code to configure or set up the testing framework before each test
    // setupFilesAfterEnv: [],
@@ -185,10 +186,10 @@ module.exports = {
    // A map from regular expressions to paths to transformers
    transform: {
       '^.+\\.js?$': 'babel-jest'
-   }
+   },
 
    // An array of regexp pattern strings that are matched against all source file paths, matched files will skip
-   // transformation transformIgnorePatterns: [ "/node_modules/" ],
+   transformIgnorePatterns: [ '/node_modules/' ],
 
    // An array of regexp pattern strings that are matched against all modules before the module loader will
    // automatically return a mock for them unmockedModulePathPatterns: undefined,

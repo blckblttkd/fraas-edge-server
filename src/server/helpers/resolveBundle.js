@@ -1,8 +1,29 @@
 import path from 'path';
 import fs from 'fs';
 
+/**
+ * @typedef Logger
+ * @property {function} info
+ * @property {function} warn
+ * @property {function} debug
+ * @property {function} trace
+ */
+/**
+ * @description Used by handlebars to determine the path to the static assets in the manifest.
+ * @public
+ * @function
+ * @param {Logger} logger The logger instance for the given request.
+ * @returns {function(...[*]=)}
+ */
 export default function resolveBundle(logger) {
-   return function(bundleName) {
+   /**
+    * @description Looks up the bundle from the published manifest.
+    * @public
+    * @function
+    * @param {string} bundleName
+    * @returns {string}
+    */
+   return (bundleName) => {
       const manifestPath = path.resolve(
          process.cwd(),
          'build',

@@ -5,6 +5,7 @@ const Root = () => {
    const { t, i18n } = useTranslation();
 
    useEffect(() => {
+      /*istanbul ignore next */
       i18n.on('languageChanged', () => {
          document.title = t('Application.Name');
       });

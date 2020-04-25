@@ -3,11 +3,16 @@ import compression from 'compression';
 import { bodyParserGraphQL } from 'body-parser-graphql';
 import path from 'path';
 import addRequestId from 'express-request-id';
+import boom from 'express-boom';
 import helmet from './helmet';
 import csrf from './csrf';
 import routes from '../routes';
 import registerViewEngine from './viewEngine';
 import loggerMiddleware from './logger';
+
+/**
+ * @module middleware
+ */
 
 /**
  * @typedef CSPOptions
@@ -28,13 +33,15 @@ import loggerMiddleware from './logger';
  */
 
 /**
- *
+ * @description Assembles all the middleware onto the app object.
  * @param {Object} app
- * @param {Object} logger
+ * @param {module:utils.Logger} logger
  * @param {MiddlewareOptions} options
  */
 export default function attach(app, logger, options) {
    app.use(addRequestId());
+   app.use(boom());
+
    logger.trace('Adding request logger');
    app.use(loggerMiddleware);
 
